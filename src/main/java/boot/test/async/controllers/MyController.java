@@ -45,7 +45,7 @@ public class MyController implements ErrorController {
 
     @RequestMapping("/myHelloDeferredThread")
     public DeferredResult<String> myHelloDeferredThread() {
-        final DeferredResult<String> ret = new DeferredResult<>();
+        final DeferredResult<String> ret = new DeferredResult<>(3600000);
         
         new Thread(new Runnable() {
             @Override
@@ -59,7 +59,7 @@ public class MyController implements ErrorController {
 
     @RequestMapping("/myErrorDeferredThread")
     public DeferredResult<String> myErrorDeferredThread() {
-        final DeferredResult<String> ret = new DeferredResult<>();
+        final DeferredResult<String> ret = new DeferredResult<>(3600000);
         
         new Thread(new Runnable() {
             @Override
@@ -77,7 +77,7 @@ public class MyController implements ErrorController {
 
     @RequestMapping("/myHelloDeferredFiber")
     public DeferredResult<String> myHelloDeferredFiber() {
-        final DeferredResult<String> ret = new DeferredResult<>();
+        final DeferredResult<String> ret = new DeferredResult<>(3600000);
         
         new Fiber(new SuspendableRunnable() {
             @Override
@@ -91,7 +91,7 @@ public class MyController implements ErrorController {
 
     @RequestMapping("/myErrorDeferredFiber")
     public DeferredResult<String> myErrorDeferredFiber() {
-        final DeferredResult<String> ret = new DeferredResult<>();
+        final DeferredResult<String> ret = new DeferredResult<>(3600000);
         
         new Fiber(new SuspendableRunnable() {
             @Override
