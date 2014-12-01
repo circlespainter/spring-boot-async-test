@@ -2,6 +2,8 @@ package boot.test.async.controllers;
 
 import co.paralleluniverse.fibers.Fiber;
 import co.paralleluniverse.fibers.SuspendExecution;
+import co.paralleluniverse.fibers.Suspendable;
+import co.paralleluniverse.strands.Strand;
 import co.paralleluniverse.strands.SuspendableRunnable;
 import org.springframework.boot.autoconfigure.web.ErrorController;
 import org.springframework.web.bind.annotation.ExceptionHandler;
@@ -34,13 +36,16 @@ public class MyController /* implements ErrorController */ {
     } */
     
     @RequestMapping("/myHello")
-    public String myHello() {
-        return "Greetings from Spring Boot!";
+    @Suspendable
+    public String myHello() throws SuspendExecution, InterruptedException {
+        Strand.sleep(1000);
+        return "Greetings from Spring Boot! Is fiber? " + Strand.currentStrand().isFiber();
     }
 
     @RequestMapping("/myError")
-    public void myError() {
-        throw new RuntimeException("Test exception");
+    public void myError() throws SuspendExecution, InterruptedException {
+        Strand.sleep(1000);
+        throw new RuntimeException("Test exception; is fiber? " + Strand.currentStrand().isFiber());
     }
 
     @RequestMapping("/myHelloDeferredThread")
