@@ -14,24 +14,24 @@ import org.springframework.web.context.request.async.DeferredResult;
  * @author circlespainter
  */
 @RestController
-public class MyController implements ErrorController {
+public class MyController /* implements ErrorController */ {
     private final static String ERROR_PATH = "/error";
     
-    @Override
+/*    @Override
     public String getErrorPath() {
         return ERROR_PATH;
-    }
+    } */
 
-    @RequestMapping(ERROR_PATH)
+/*    @RequestMapping(ERROR_PATH)
     public String error() {
         return "Error!";
-    }
+    } */
 
-    @ExceptionHandler
+/*    @ExceptionHandler
     @ResponseBody
     public String handleException(RuntimeException ex) {
         return "Handled exception: " + ex.getMessage();
-    }
+    } */
     
     @RequestMapping("/myHello")
     public String myHello() {
